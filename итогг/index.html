@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Продажа коробок - Главная</title>
+</head>
+<style>
+.ddiv{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+   height: 600px;
+}
+img{
+  height: 300px;
+}
+}
+</style>
+<body class="fade-in">
+  <header style="text-align:center ;">
+    <a href="index.html">Главная</a> |
+    <a href="page2.html">Страница 2</a> |
+    <a href="page3.html">Страница 3</a>
+  </header>
+
+  <div class="ddiv" style="text-align:center ">
+    <h1>Добро пожаловать на главную страницу!</h1>
+    <p>Здесь вы можете ознакомиться с нашими предложениями по продаже коробок.</p>
+    <p>Выберите нужную вам страницу из навигационного меню.</p>
+    <img src="https://pereezdmarket.ru/images/003/640/221/3640221/original/60x50x40.jpg" alt="">
+  </div>
+
+  <footer style="text-align:center ;">
+    &copy; 2023 Продажа коробок
+  </footer>
+
+  <script>
+window.addEventListener('DOMContentLoaded', function() {
+  const fadeElement = document.querySelector('.fade-in');
+
+  function fadeIn(element) {
+    let opacity = 0;
+    const interval = setInterval(function() {
+      if (opacity < 1) {
+        opacity += 0.1;
+        element.style.opacity = opacity;
+      } else {
+        clearInterval(interval);
+      }
+    }, 100);
+  }
+
+  fadeIn(fadeElement);
+});
+
+  </script>
+</body>
+</html>

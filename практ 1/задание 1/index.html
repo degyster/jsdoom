@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Таблица с числами</title>
+  <style>
+    td {
+      padding: 10px;
+    }
+    .orange {
+      background-color: orange;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    let numbers = [];
+    for (let i = 0; i < 30; i++) {
+      let randomNum = Math.floor(Math.random() * 100);
+      numbers.push(randomNum);
+    }
+    let table = document.createElement('table');
+    let index = 0;
+    for (let row = 0; row < 5; row++) {
+      let tr = document.createElement('tr');
+      for (let col = 0; col < 6; col++) {
+        let td = document.createElement('td');
+        td.textContent = numbers[index];
+
+        if (numbers[index] >= 50) {
+          td.classList.add('orange');
+        }
+
+        tr.appendChild(td);
+        index++;
+      }
+      table.appendChild(tr);
+    }
+    document.body.appendChild(table);
+  </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Информация о котиках</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .favorite {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Информация о котиках</h1>
+
+    <div id="catsContainer" class="row"></div>
+  </div>
+
+  <script src="ss.js"></script>
+  <script>
+    function displayCats(cats) {
+      const catsContainer = document.getElementById('catsContainer');
+
+      cats.forEach(cat => {
+        const col = document.createElement('div');
+        col.classList.add('col-sm-6', 'col-md-4', 'col-lg-3', 'mb-4');
+
+        const card = document.createElement('div');
+        card.classList.add('card');
+
+        const img = document.createElement('img');
+        img.classList.add('card-img-top');
+        img.src = cat.img_link;
+        img.alt = cat.name;
+        card.appendChild(img);
+
+        const cardBody = document.createElement('div');
+        cardBody.classList.add('card-body');
+
+        const name = document.createElement('h5');
+        name.classList.add('card-title');
+        name.textContent = cat.name;
+        cardBody.appendChild(name);
+
+        const age = document.createElement('p');
+        age.classList.add('card-text');
+        age.textContent = `Возраст: ${cat.age} год(а)`;
+        cardBody.appendChild(age);
+
+        const rate = document.createElement('p');
+        rate.classList.add('card-text');
+        rate.textContent = `Оценка: ${cat.rate}`;
+        cardBody.appendChild(rate);
+
+        const description = document.createElement('p');
+        description.classList.add('card-text');
+        description.textContent = cat.description;
+        cardBody.appendChild(description);
+
+        if (cat.favourite) {
+          card.classList.add('favorite');
+        }
+
+        card.appendChild(cardBody);
+        col.appendChild(card);
+        catsContainer.appendChild(col);
+      });
+    }
+
+
+    displayCats(cats);
+  </script>
+</body>
+</html>

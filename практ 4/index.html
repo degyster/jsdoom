@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>номер телефона</title>
+  <style>
+    .slider {
+      width: 1910px;
+      height: 10px;
+      background-color: #ccc;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .slider .thumb {
+      width: 20px;
+      height: 20px;
+      background-color: #555;
+      position: absolute;
+      top: -5px;
+      border-radius: 50%;
+      cursor: grab;
+    }
+
+    .slider .value {
+      position: absolute;
+      top: -30px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>номер телефона</h1>
+
+  <div class="slider">
+    <div class="thumb"></div>
+    <div class="value">0</div>
+  </div>
+
+  <script>
+    const slider = document.querySelector('.slider');
+    const thumb = slider.querySelector('.thumb');
+    const value = slider.querySelector('.value');
+    const sliderWidth = slider.offsetWidth - thumb.offsetWidth;
+    let isDragging = false;
+
+    function setValue(position) {
+      const percent = (position / sliderWidth) * 999999999999;
+      const roundedValue = Math.round(percent);
+      value.textContent = roundedValue;
+    }
+
+    thumb.addEventListener('mousedown', () => {
+      isDragging = true;
+    });
+
+    document.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+
+    document.addEventListener('mousemove', (event) => {
+      if (isDragging) {
+        let position = event.pageX - slider.getBoundingClientRect().left - (thumb.offsetWidth / 2);
+        if (position < 0) {
+          position = 0;
+        } else if (position > sliderWidth) {
+          position = sliderWidth;
+        }
+        thumb.style.left = position + 'px';
+        setValue(position);
+      }
+    });
+  </script>
+</body>
+</html>

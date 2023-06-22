@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Продажа коробок - Слайдер</title>
+  <style>
+    body {
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    .slider-container {
+      margin-top: 100px;
+    }
+
+    .slider {
+      width: 300px;
+      height: 10px;
+      background-color: #ddd;
+      margin: 20px auto;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .slider-thumb {
+      width: 20px;
+      height: 20px;
+      background-color: #333;
+      position: absolute;
+      top: -5px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .slider-value {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<bod class="fade-in">
+  <header>
+    <a href="index.html">Главная</a> |
+    <a href="page2.html">Страница 2</a> |
+    <a href="page3.html">Страница 3</a>
+  </header>
+
+  <div class="slider-container">
+    <p>Сколько коробок вы хотите купить?</p>
+    <div class="slider">
+      <div class="slider-thumb" id="slider-thumb"></div>
+    </div>
+    <p class="slider-value" id="slider-value">0</p>
+  </div>
+
+  <footer>
+    &copy; 2023 Продажа коробок
+  </footer>
+
+  <script>
+    window.onload = function() {
+      let sliderContainer = document.querySelector(".slider");
+      let sliderThumb = document.getElementById("slider-thumb");
+      let sliderValue = document.getElementById("slider-value");
+      let minValue = 0;
+      let maxValue = 100;
+      let currentValue = minValue;
+      let sliderWidth = sliderContainer.offsetWidth - sliderThumb.offsetWidth;
+
+      function updateSlider(event) {
+        let newPosition = event.clientX - sliderContainer.getBoundingClientRect().left;
+        if (newPosition < 0) {
+          newPosition = 0;
+        } else if (newPosition > sliderWidth) {
+          newPosition = sliderWidth;
+        }
+
+        let percentage = (newPosition / sliderWidth) * 100;
+        currentValue = Math.round((percentage / 100) * (maxValue - minValue)) + minValue;
+
+        sliderThumb.style.left = newPosition + "px";
+        sliderValue.innerHTML = currentValue;
+      }
+
+      sliderThumb.addEventListener("mousedown", function(event) {
+        event.preventDefault();
+
+        function moveSlider(event) {
+          updateSlider(event);
+        }
+
+        function stopSlider() {
+          document.removeEventListener("mousemove", moveSlider);
+          document.removeEventListener("mouseup", stopSlider);
+        }
+
+        document.addEventListener("mousemove", moveSlider);
+        document.addEventListener("mouseup", stopSlider);
+      });
+
+      sliderContainer.addEventListener("click", function(event) {
+        updateSlider(event);
+      });
+    };
+    window.addEventListener('DOMContentLoaded', function() {
+  const fadeElement = document.querySelector('.fade-in');
+
+  function fadeIn(element) {
+    let opacity = 0;
+    const interval = setInterval(function() {
+      if (opacity < 1) {
+        opacity += 0.1;
+        element.style.opacity = opacity;
+      } else {
+        clearInterval(interval);
+      }
+    }, 100);
+  }
+
+  fadeIn(fadeElement);
+});
+
+  </script>
+</body>
+</html>

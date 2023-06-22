@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Выпадающее меню</title>
+  <style>
+    ul.menu {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    ul.submenu {
+      display: none;
+      padding-left: 20px;
+    }
+
+    ul.menu li {
+      margin-bottom: 5px;
+      background-color: #f1f1f1;
+    }
+
+    ul.menu li a {
+      display: block;
+      color: #333;
+      text-decoration: none;
+      padding: 10px;
+    }
+
+    ul.menu li a:hover {
+      color: #ff0000;
+    }
+  </style>
+</head>
+<body>
+  <ul class="menu">
+    <li>
+      <a href="#">Кошки</a>
+      <ul class="submenu">
+        <li>
+          <a href="#">Персидская</a>
+          <ul class="submenu">
+            <li><a href="#">Большая персидская</a></li>
+            <li><a href="#">Малая персидская</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">Сиамская</a>
+          <ul class="submenu">
+            <li><a href="#">Тайская</a></li>
+            <li><a href="#">Бирманская</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">Мейн-кун</a>
+          <ul class="submenu">
+            <li><a href="#">Американская</a></li>
+            <li><a href="#">Европейская</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Собаки</a>
+      <ul class="submenu">
+        <li>
+          <a href="#">Бигль</a>
+          <ul class="submenu">
+            <li><a href="#">Стандартный бигль</a></li>
+            <li><a href="#">Карликовый бигль</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">Хаски</a>
+          <ul class="submenu">
+            <li><a href="#">Аляскинский маламут</a></li>
+            <li><a href="#">Сибирский хаски</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">Бульдог</a>
+          <ul class="submenu">
+            <li><a href="#">Английский бульдог</a></li>
+            <li><a href="#">Французский бульдог</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <script>
+    let submenus = document.getElementsByClassName('submenu');
+
+    for (let i = 0; i < submenus.length; i++) {
+      let submenu = submenus[i];
+
+      submenu.parentElement.addEventListener('click', function(e) {
+        e.stopPropagation();
+
+        let clickedElement = this;
+        let subMenuElement = clickedElement.getElementsByClassName('submenu')[0];
+
+        if (subMenuElement) {
+          if (subMenuElement.style.display === 'block') {
+            subMenuElement.style.display = 'none';
+          } else {
+            subMenuElement.style.display = 'block';
+          }
+        } else {
+          let link = clickedElement.getElementsByTagName('a')[0];
+          let url = link.getAttribute('href');
+          window.location.href = url;
+        }
+      });
+    }
+  </script>
+</body>
+</html>
